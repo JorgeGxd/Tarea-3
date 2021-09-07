@@ -24,6 +24,8 @@ public class Principal extends javax.swing.JFrame {
     
     public Principal() {
         initComponents();
+        
+        //custom table 1
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         jTable1.getColumnModel().getColumn(0).setCellRenderer(tcr);
@@ -31,7 +33,16 @@ public class Principal extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(2).setCellRenderer(tcr);
         jTable1.getColumnModel().getColumn(3).setCellRenderer(tcr);
         jTable1.getColumnModel().getColumn(4).setCellRenderer(tcr);
-
+        
+        //custom table 2
+        DefaultTableCellRenderer tcr2 = new DefaultTableCellRenderer();
+        tcr2.setHorizontalAlignment(SwingConstants.CENTER);
+        jTable3.getColumnModel().getColumn(0).setCellRenderer(tcr2);
+        jTable3.getColumnModel().getColumn(1).setCellRenderer(tcr2);
+        jTable3.getColumnModel().getColumn(2).setCellRenderer(tcr2);
+        jTable3.getColumnModel().getColumn(3).setCellRenderer(tcr2);
+        jTable3.getColumnModel().getColumn(4).setCellRenderer(tcr2);
+        
         this.fillData();
     }
 
@@ -41,7 +52,26 @@ public class Principal extends javax.swing.JFrame {
         this.fillNotes();
         this.fillProm();
         this.FillTable();
+        this.FillTable2();
     }
+    
+    
+    public int getPosition(){
+        double mayor = 0;
+        int pos = 0;
+        for(int i = 0; i < 10; i++){
+            if(Double.valueOf(this.array[i][4]) > mayor)
+            {
+                mayor = Double.valueOf(this.array[i][4]);
+                pos = i;
+            }
+        }
+        return pos;
+    }
+    
+    
+    
+    
     
     public void FillTable(){
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
@@ -50,6 +80,22 @@ public class Principal extends javax.swing.JFrame {
             Object[] row = {this.array[i][0], this.array[i][1], this.array[i][2], this.array[i][3], this.array[i][4]};              
             model.addRow(row);
         }
+    }
+    
+    
+    public void FillTable2(){
+        
+        //custom
+        
+        
+        
+        
+        DefaultTableModel model2 = (DefaultTableModel)jTable3.getModel();
+        model2.setRowCount(0);
+        int pos = this.getPosition();
+        System.out.println(pos);
+        Object[] ro2 = {this.array[pos][0], this.array[pos][1], this.array[pos][2], this.array[pos][3], this.array[pos][4]};              
+        model2.addRow(ro2);
     }
     
     
@@ -107,10 +153,30 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Aplication");
+        setLocation(new java.awt.Point(300, 200));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,21 +205,54 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Prueba 1", "Prueba 2", "Prueba 3", "Promedio"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTable3);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Promedio mas Alto");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(279, 279, 279)
+                        .addComponent(jLabel1)))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(191, 191, 191))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62))
         );
 
         pack();
@@ -195,7 +294,12 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 }
